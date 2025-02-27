@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Field {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  fieldCode     String   @unique
+  fieldName     String
+  fieldLocation String
+  fieldSize     String
+  img_1         String?
+  img_2         String?
+  staffs        String[]
+}
+
+model Crop {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  cropCode           String  @unique
+  cropCommonName     String
+  cropScientificName String
+  cropCategory       String
+  cropField          String
+  cropSeason         String
+  cropImage          String?
+}
+
+model Staff {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  staffId     String   @unique
+  firstName   String
+  lastName    String
+  designation String
+  gender      String
+  joinedDate  String
+  dob         String
+  address     String
+  contactNo   String
+  email       String   @unique
+  role        String
+  fields      String[]
+  vehicle     String[]
+}
+
+model Vehicle {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String  @unique
+  licensePlateNumber String
+  vehicleCategory    String
+  fuelType           String
+  status             Boolean
+  allocatedStaff     String
+  remarks            String?
+}
+
+model Equipment {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  equipmentId     String  @unique
+  equipmentName   String
+  equipmentType   String
+  equipmentStatus Boolean
+  assignedStaff   String?
+  assignedField   String?
+}
