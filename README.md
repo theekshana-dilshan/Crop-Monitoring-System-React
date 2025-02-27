@@ -77,9 +77,6 @@ npm install
 npm start
 ```
 
-```
-```
-
 ## Future Enhancements
 
 - **Mobile App Integration**: A React Native app for field operations.
